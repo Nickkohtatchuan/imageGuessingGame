@@ -1,0 +1,37 @@
+#button1 {background-color: #D2364A;
+			border: 1px solid #D2364A;
+			color: white}
+
+#button2 {background-color: #235EC3;
+			border: 1px solid #235EC3;
+			color: white}
+
+#button3 {background-color: #16E060;
+			border: 1px solid #16E060;
+			color: white}
+
+#button4 {background-color: #E3F540;
+			border: 1px solid #E3F540;
+			color: white}
+
+.tags{width:200px;
+		height:50px;
+		font-size:25px;
+		border-radius:90px;
+	}
+
+html{text-align: center;
+   }
+
+#list-data li {
+	display: inline-block;
+	vertical-align:top;
+	border: 1px solid blue;
+
+}
+
+header{background-color: blue;
+	border-radius:90px;
+	color:white;}
+
+html {background-image: url("https://cdn2.slidemodel.com/wp-content/uploads/7243-01-low-poly-background-16x9-1.jpg");}

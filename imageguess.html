@@ -1,0 +1,166 @@
+<html>
+
+<header>
+		<h1>Word Guessing Game - Sports Edition (Tumblr API)</h1>
+		<link href="imageguess.css" rel="stylesheet"/>
+</header>
+	
+<body onload="getRandomTags()"">
+		<div>
+			<b>
+			<p>CAN YOU GUESS THE TAG?</p>
+			<p>CLICK ON THE RIGHT TAG ASSOCIATED TO THESE PHOTOS!</p>
+			</b>
+		</div>
+		
+		<!--4 tags option-->
+		<div>
+			<button class="tags" id="button1" type="button" onclick="clickMe()">Tag 1</button>
+			<button class="tags" id="button2" type="button" onclick="clickMe()">Tag 2</button>
+			<button class="tags" id="button3" type="button" onclick="clickMe()">Tag 3</button>
+			<button class="tags" id="button4" type="button" onclick="clickMe()">Tag 4</button>
+		</div>
+
+		<!--Loading Images from Tumblr-->
+		<ul id='list-data'>
+		</ul>
+
+
+<script>
+		
+		const tagName = document.querySelectorAll('.tags');
+		const list = document.getElementById('list-data');
+
+		//Setting Tag Arrays and Generating Random Tag Names from the Array
+
+		function getRandomTags(){
+
+		let tagsArray = ["Football", "Rugby", "Badminton", "Rock Climbing", "Swimming", "Volleyball", "Boxing", "Snowboarding", "Basketball", "Tennis"];
+		let random = Math.random();
+
+			for (i=0; i<tagName.length; i++){
+			
+				let randomNo = Math.floor(random*tagsArray.length);
+
+				tagName[i].innerHTML = tagsArray[randomNo];
+				console.log(randomNo)
+				tagsArray.splice(randomNo, 1)
+				console.log(tagsArray)
+				
+				}
+		
+
+		//After generating 4 random tag names, to fetch photos of one of the 4 tags at random
+		
+				let randomTagNo = Math.floor(random*4);
+				console.log(randomTagNo);
+				let idTag = tagName[randomTagNo].innerHTML;
+				getTaggedPhotos(idTag);
+				return result = idTag;
+		}
+
+		//Viewer guess the right tag
+		function clickMe(){
+			if (result == event.target.innerHTML){
+				alert("You guessed it right!");
+					//Reset
+					list.innerHTML ='';
+					for (i=0; i<tagName.length; i++){tagName[i].innerHTML = "";}
+					return getRandomTags();
+					getRandomTags();
+			}
+			else 
+				alert ("The correct tag is " + result + ". Try again :)")
+					//Reset
+					list.innerHTML ='';
+					for (i=0; i<tagName.length; i++){tagName[i].innerHTML = "";}
+					return getRandomTags();
+					getRandomTags();	
+		}
+
+		
+		//Fetch function
+
+		function getTaggedPhotos(sport){
+
+			fetch('https://api.tumblr.com/v2/tagged?tag=' + sport + '&api_key=ZtD2eFotf0zXHZSHdXMnCoAl7Zcf4twbtIoRxiI5xc7udkzYEF')
+		  	
+		  	.then(function(response){
+		     return response.json(); // convert the raw response into a JSON
+		     })
+		  	
+		  	.then(function(result){
+		    	console.log(result);
+		   		console.log(result.response);  
+			  	
+		  	const items = result.response;
+		  	
+		  	for (let i=0; i<items.length; i++){
+		  		const item = items[i];
+
+		  		if(item.photos != undefined){
+		  		const altSize = item.photos[0].alt_sizes;
+		  		const imgSrc = altSize[altSize.length - 3].url; 
+
+
+		  		const img = document.createElement('img'); 
+		  		img.src = imgSrc;
+		  		const li = document.createElement('li');
+		  		li.appendChild(img);
+		  		//li.innerHTML = imgSrc;
+		  		list.appendChild(li);
+		  	}}
+		  })
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+</script>
+
+
+</body>
+</html>
